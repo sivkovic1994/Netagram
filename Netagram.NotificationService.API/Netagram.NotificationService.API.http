@@ -1,0 +1,6 @@
+@Netagram.NotificationService.API_HostAddress = http://localhost:5200
+
+GET {{Netagram.NotificationService.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

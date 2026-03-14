@@ -1,0 +1,6 @@
+@Netagram.PostService.API_HostAddress = http://localhost:5036
+
+GET {{Netagram.PostService.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
