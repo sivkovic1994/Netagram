@@ -6,6 +6,5 @@ namespace Netagram.UserService.Application.Interfaces
     {
         Task<AuthResult> RegisterAsync(RegisterRequest request);
         Task<AuthResult> LoginAsync(LoginRequest request);
-        Task<AuthResult> GetCurrentUserAsync(string userId);
     }
 }

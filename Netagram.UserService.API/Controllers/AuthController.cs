@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Netagram.UserService.Application.DTOs;
 using Netagram.UserService.Application.Interfaces;
-using System.Security.Claims;
 
 namespace Netagram.UserService.API.Controllers
 {
@@ -35,22 +33,6 @@ namespace Netagram.UserService.API.Controllers
 
             if (!result.Success)
                 return StatusCode(result.StatusCode, result.Errors);
-
-            return Ok(result.Data);
-        }
-
-        [Authorize]
-        [HttpGet("me")]
-        public async Task<IActionResult> GetCurrentUser()
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            if (userId == null)
-                return Unauthorized();
-
-            var result = await _authService.GetCurrentUserAsync(userId);
-
-            if (!result.Success)
-                return StatusCode(result.StatusCode);
 
             return Ok(result.Data);
         }

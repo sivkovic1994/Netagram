@@ -92,28 +92,6 @@ namespace Netagram.UserService.Infrastructure.Services
             };
         }
 
-        public async Task<AuthResult> GetCurrentUserAsync(string userId)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-
-            if (user == null)
-            {
-                return new AuthResult { Success = false, StatusCode = 404 };
-            }
-
-            return new AuthResult
-            {
-                Success = true,
-                Data = new AuthResponse
-                {
-                    Token = "",
-                    Email = user.Email!,
-                    UserId = user.Id,
-                    Username = user.UserName
-                }
-            };
-        }
-
         private string GenerateJwtToken(ApplicationUser user)
         {
             var claims = new[]

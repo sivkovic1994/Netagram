@@ -2,11 +2,17 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Netagram.UserService.Infrastructure;
 using Netagram.UserService.Infrastructure.Data;
 using Netagram.UserService.Infrastructure.Persistence;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+// Register Infrastructure services (DbContext, AuthService, etc.)
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddDbContext<UserDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -45,8 +51,6 @@ builder.Services.AddAuthentication(options =>
             Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Secret"]!))
     };
 });
-
-builder.Services.AddControllers();
 
 var app = builder.Build();
 
