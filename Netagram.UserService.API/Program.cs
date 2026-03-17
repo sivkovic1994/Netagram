@@ -13,9 +13,6 @@ builder.Services.AddControllers();
 // Register Infrastructure services (DbContext, AuthService, etc.)
 builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddDbContext<UserDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
 // Add Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
 {

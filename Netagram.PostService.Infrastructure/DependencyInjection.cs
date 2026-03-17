@@ -1,22 +1,19 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Netagram.UserService.Application.Interfaces;
-using Netagram.UserService.Infrastructure.Data;
-using Netagram.UserService.Infrastructure.Services;
+using Netagram.PostService.Application;
+using Netagram.PostService.Infrastructure.Data;
 
-namespace Netagram.UserService.Infrastructure
+namespace Netagram.PostService.Infrastructure
 {
     public static class DependencyInjection
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<UserDbContext>(options =>
+            services.AddDbContext<PostDbContext>(options =>
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<IUserService, Services.UserService>();
-            services.AddScoped<IFollowService, FollowService>();
+            services.AddScoped<IPostService, Services.PostService>();
 
             return services;
         }
