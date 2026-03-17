@@ -16,6 +16,7 @@ namespace Netagram.UserService.Infrastructure
 
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, Services.UserService>();
+            services.AddScoped<IFollowService, FollowService>();
 
             return services;
         }

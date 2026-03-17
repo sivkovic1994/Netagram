@@ -10,10 +10,12 @@ namespace Netagram.UserService.API.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
+        private readonly IFollowService _followService;
 
-        public UsersController(IUserService userService)
+        public UsersController(IUserService userService, IFollowService followService)
         {
             _userService = userService;
+            _followService = followService;
         }
 
         [Authorize]
@@ -40,6 +42,50 @@ namespace Netagram.UserService.API.Controllers
 
             if (!result.Success)
                 return StatusCode(result.StatusCode);
+
+            return Ok(result.Data);
+        }
+
+        [Authorize]
+        [HttpPost("{id}/follow")]
+        public async Task<IActionResult> FollowUser(string id)
+        {
+            var followerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var result = await _followService.FollowUserAsync(followerId!, id);
+
+            if (!result.Success)
+                return StatusCode(result.StatusCode, result.Errors);
+
+            return Ok();
+        }
+
+        [Authorize]
+        [HttpPost("{id}/unfollow")]
+        public async Task<IActionResult> UnfollowUser(string id)
+        {
+            var followerId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            var result = await _followService.UnfollowUserAsync(followerId!, id);
+
+            if (!result.Success)
+                return StatusCode(result.StatusCode);
+
+            return Ok();
+        }
+
+        [HttpGet("{id}/followers")]
+        public async Task<IActionResult> GetFollowers(string id)
+        {
+            var result = await _followService.GetFollowersAsync(id);
+
+            return Ok(result.Data);
+        }
+
+        [HttpGet("{id}/following")]
+        public async Task<IActionResult> GetFollowing(string id)
+        {
+            var result = await _followService.GetFollowingAsync(id);
 
             return Ok(result.Data);
         }
