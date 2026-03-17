@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Netagram.UserService.Application.Interfaces;
-using Netagram.UserService.Infrastructure.Persistence;
+using Netagram.UserService.Infrastructure.Data;
 using Netagram.UserService.Infrastructure.Services;
 
 namespace Netagram.UserService.Infrastructure

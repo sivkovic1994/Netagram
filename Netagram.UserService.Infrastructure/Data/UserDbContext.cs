@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Netagram.UserService.Domain.Entities;
-using Netagram.UserService.Infrastructure.Data;
 
-namespace Netagram.UserService.Infrastructure.Persistence;
+namespace Netagram.UserService.Infrastructure.Data;
 
 public class UserDbContext : IdentityDbContext<ApplicationUser>
 {

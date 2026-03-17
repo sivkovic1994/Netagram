@@ -2,7 +2,7 @@
 using Netagram.UserService.Application.DTOs;
 using Netagram.UserService.Application.Interfaces;
 using Netagram.UserService.Domain.Entities;
-using Netagram.UserService.Infrastructure.Persistence;
+using Netagram.UserService.Infrastructure.Data;
 
 namespace Netagram.UserService.Infrastructure.Services
 {

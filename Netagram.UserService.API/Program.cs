@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Netagram.UserService.Infrastructure;
 using Netagram.UserService.Infrastructure.Data;
-using Netagram.UserService.Infrastructure.Persistence;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
