@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Netagram.UserService.API.Middleware;
 using Netagram.UserService.Infrastructure;
 using Netagram.UserService.Infrastructure.Data;
 using System.Text;
@@ -49,6 +50,10 @@ builder.Services.AddAuthentication(options =>
 });
 
 var app = builder.Build();
+
+// Global error handler middleware catches all unhandled exceptions, logs them, and returns a consistent JSON error response to the client.
+// Add this middleware at the start of the pipeline to ensure all errors are handled in one place.
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 // Auto-apply migrations
 using (var scope = app.Services.CreateScope())
