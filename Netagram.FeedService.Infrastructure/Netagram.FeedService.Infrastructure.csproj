@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.14" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Netagram.FeedService.Application\Netagram.FeedService.Application.csproj" />
     <ProjectReference Include="..\Netagram.FeedService.Domain\Netagram.FeedService.Domain.csproj" />
   </ItemGroup>

@@ -6,6 +6,7 @@ namespace Netagram.PostService.Application
     {
         Task<PostResult> CreatePostAsync(string userId, string authorUsername, CreatePostRequest request);
         Task<PostResult?> GetPostByIdAsync(Guid postId);
+        Task<IEnumerable<PostResult>> GetPostsByUserIdsAsync(IEnumerable<string> userIds);
         Task<IEnumerable<PostResult>> GetUserPostsAsync(string userId);
         Task<bool> DeletePostAsync(string userId, Guid postId);
     }

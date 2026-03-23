@@ -60,6 +60,31 @@ namespace Netagram.PostService.Infrastructure.Services
             return post;
         }
 
+        public async Task<IEnumerable<PostResult>> GetPostsByUserIdsAsync(IEnumerable<string> userIds)
+        {
+            if (userIds == null)
+                return Enumerable.Empty<PostResult>();
+
+            var idsList = userIds as IList<string> ?? userIds.ToList();
+            if (!idsList.Any())
+                return Enumerable.Empty<PostResult>();
+
+            return await _context.Posts
+                .Where(p => idsList.Contains(p.UserId))
+                .OrderByDescending(p => p.CreatedAt)
+                .Select(p => new PostResult
+                {
+                    Id = p.Id,
+                    Content = p.Content,
+                    AuthorId = p.UserId,
+                    AuthorUsername = p.AuthorUsername,
+                    CreatedAt = p.CreatedAt,
+                    Likes = 0,
+                    Comments = 0
+                })
+                .ToListAsync();
+        }
+
         public async Task<IEnumerable<PostResult>> GetUserPostsAsync(string userId)
         {
             return await _context.Posts

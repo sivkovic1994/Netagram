@@ -51,6 +51,13 @@ namespace Netagram.PostService.API.Controllers
             return Ok(posts);
         }
 
+        [HttpPost("users")]
+        public async Task<IActionResult> GetPostsByUsers([FromBody] List<string> userIds)
+        {
+            var posts = await _postService.GetPostsByUserIdsAsync(userIds);
+            return Ok(posts);
+        }
+
         [Authorize]
         [HttpDelete("{postId}")]
         public async Task<IActionResult> Delete(Guid postId)
