@@ -31,8 +31,8 @@ namespace Netagram.FeedService.Infrastructure.Services
                 {
                     Id = p.Id,
                     Content = p.Content,
-                    AuthorId = p.UserId,
-                    AuthorUsername = "unknown",
+                    AuthorId = p.AuthorId,
+                    AuthorUsername = p.AuthorUsername,
                     CreatedAt = p.CreatedAt
                 });
 
